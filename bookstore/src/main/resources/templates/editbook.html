@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+</head>
+<body>
+    <h1>Edit Book</h1>
+    <style>
+        .form-group {
+            margin-bottom: 5px;
+        }
+        input, button {
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+    </style>
+
+<form action="#" th:action="@{/editbook/{id}(id=${book.id})}" th:object="${book}" method="post">
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" th:field="*{title}" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="author">Author:</label>
+        <input type="text" id="author" th:field="*{author}" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="publicationYear">Year:</label>
+        <input type="number" id="publicationYear" th:field="*{publicationYear}" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" th:field="*{isbn}" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" id="price" th:field="*{price}" class="form-control"/>
+    </div>
+
+    <input type="submit" value="Save Changes" class="btn btn-primary"></input>
+</form>
+    
+</body>
+</html>

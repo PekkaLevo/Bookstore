@@ -3,6 +3,7 @@ package hh.project.bookstore.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -48,6 +49,20 @@ public class BookController {
     @GetMapping("/deletebook/{id}")
     public String deleteBook(@PathVariable long id) {
         repository.deleteById(id);
+        return "redirect:/booklist";
+    }
+
+    @GetMapping("/editbook/{id}")
+    public String showEditBookForm(@PathVariable long id, Model model) {
+        Book book = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book ID:" + id));
+        model.addAttribute("book", book);
+        return "editbook";
+    }
+
+    @PostMapping("/editbook/{id}")
+    public String updateBook(@PathVariable long id, @ModelAttribute Book book) {
+        book.setId(id);
+        repository.save(book);
         return "redirect:/booklist";
     }
 }
