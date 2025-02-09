@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book List</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Book List</h1>
@@ -31,12 +32,16 @@
             <tr th:each="book : ${books}">
                 <td th:text="${book.title}">Title</td>
                 <td th:text="${book.author}">Author</td>
-                <td th:text="${book.publicationYear}">Year</td>
+                <td th:text="${book.publicationYear}">Publication Year</td>
                 <td th:text="${book.isbn}">ISBN</td>
                 <td th:text="${book.price}">Price</td>
+                <td>
+                    <a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a>
+                </td>
             </tr>
         </tbody>
     </table>
 
+    <a href="/addbook">Add Book</a>
 </body>
 </html>
