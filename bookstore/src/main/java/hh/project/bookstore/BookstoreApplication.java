@@ -23,7 +23,7 @@ public class BookstoreApplication {
 	public CommandLineRunner demo(CategoryRepository categoryRepository, Repository repository) {
     	return (args) -> {
         	Category fantasy = new Category("Fantasy");
-        	Category scifi = new Category("Fantasy");
+        	Category scifi = new Category("Science Fiction");
 			Category horror = new Category("Horror");
         	categoryRepository.saveAll(List.of(fantasy, scifi, horror));
 

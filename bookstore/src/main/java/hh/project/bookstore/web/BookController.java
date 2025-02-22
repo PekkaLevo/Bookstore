@@ -6,18 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
 import hh.project.bookstore.repository.Repository;
 import hh.project.bookstore.domain.Book;
+import hh.project.bookstore.repository.CategoryRepository;
 
 @Controller
 public class BookController {
 
     private final Repository repository;
+    private final CategoryRepository categoryRepository;
 
-    public BookController(Repository repository) {
+    public BookController(Repository repository, CategoryRepository categoryRepository) {
         this.repository = repository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -37,6 +38,7 @@ public class BookController {
     @GetMapping("/addbook")
     public String showAddBookForm(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addbook";
     }
 
