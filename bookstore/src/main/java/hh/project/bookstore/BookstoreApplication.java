@@ -4,6 +4,9 @@ import hh.project.bookstore.domain.Book;
 import hh.project.bookstore.domain.Category;
 import hh.project.bookstore.repository.CategoryRepository;
 import hh.project.bookstore.repository.Repository;
+
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,13 +22,15 @@ public class BookstoreApplication {
     @Bean
 	public CommandLineRunner demo(CategoryRepository categoryRepository, Repository repository) {
     	return (args) -> {
-        	Category scienceFiction = categoryRepository.save(new Category("Science Fiction"));
-        	Category fantasy = categoryRepository.save(new Category("Fantasy"));
-        	Category horror = categoryRepository.save(new Category("Horror"));
+        	Category fantasy = new Category("Fantasy");
+        	Category scifi = new Category("Fantasy");
+			Category horror = new Category("Horror");
+        	categoryRepository.saveAll(List.of(fantasy, scifi, horror));
 
-        	repository.save(new Book("The Fellowship of the Ring", "J. R. R. Tolkien", 2012, "0007488300", 18.95, scienceFiction));
-        	repository.save(new Book("Harry Potter: Prisoner of Azkaban", "J. K. Rowling", 1999, "9781408894644", 12.95, fantasy));
-        	repository.save(new Book("The Last Wish: Introducing the Witcher", "Andrzej Sapkowski", 1993, "9780316029186", 12.99, horror));
+        	Book book1 = (new Book("The Fellowship of the Ring", "J. R. R. Tolkien", 2012, "0007488300", 18.95, fantasy));
+        	Book book2 = (new Book("Harry Potter: Prisoner of Azkaban", "J. K. Rowling", 1999, "9781408894644", 12.95, fantasy));
+        	Book book3 = (new Book("The Last Wish: Introducing the Witcher", "Andrzej Sapkowski", 1993, "9780316029186", 12.99, horror));
+			repository.saveAll(List.of(book1, book2, book3));
 
         	System.out.println("Fetch all the categories");
         	categoryRepository.findAll().forEach(category -> {
@@ -36,6 +41,8 @@ public class BookstoreApplication {
         	repository.findAll().forEach(book -> {
             	System.out.println("Book [id=" + book.getId() + ", title=" + book.getTitle() + ", author=" + book.getAuthor() +
                     	", publicationYear=" + book.getPublicationYear() + ", isbn=" + book.getIsbn() + ", price=" + book.getPrice() + "]");
+			
+			System.out.println("Books and categories added!");		
         });
     };
 }
