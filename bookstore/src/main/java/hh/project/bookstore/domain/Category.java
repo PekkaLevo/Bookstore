@@ -3,6 +3,7 @@ package hh.project.bookstore.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,11 +16,12 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long category_id;
 
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonIgnore 
     private List<Book> books = new ArrayList<>();
 
     public Category() {}
@@ -29,7 +31,7 @@ public class Category {
     }
 
     public long getId() {
-        return id;
+        return category_id;
     }
 
     public String getName() {
@@ -41,7 +43,7 @@ public class Category {
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.category_id = id;
     }
 
     public void setName(String name) {
@@ -54,6 +56,6 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category [id=" + id + ", name=" + name + "]";
+        return "Category [id=" + category_id + ", name=" + name + "]";
     }
 }

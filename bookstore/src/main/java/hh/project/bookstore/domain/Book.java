@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Book {
@@ -21,6 +22,7 @@ public class Book {
     private double price;
 
     @ManyToOne
+    @JsonIgnore 
     @JoinColumn(name = "category_id") 
     private Category category;
 
