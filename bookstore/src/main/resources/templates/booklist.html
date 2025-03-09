@@ -39,6 +39,7 @@
                         <td th:text="${book.category.name} ?: 'No Category'"></td>
                         <td>
                             <a th:href="@{/editbook/{id}(id=${book.id})}" class="btn btn-primary btn-sm">Edit</a>
+                            <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" 
                             <a th:href="@{/deletebook/{id}(id=${book.id})}" class="btn btn-danger btn-sm">Delete</a>
                         </td>
                     </tr>
