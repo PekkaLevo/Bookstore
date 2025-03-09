@@ -8,6 +8,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login"; // Tämä palauttaa login.html -sivun
+        return "login";
     }
 }
